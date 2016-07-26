@@ -3371,8 +3371,12 @@ function createEntry() {
   });
 
   hook('fetch', function(fetch) {
+    var self = this;
     return function(load) {
-      if (this.defined[load.name]) {
+      if(!self.defined){
+        self.defined = {};
+      }
+      if (self.defined[load.name]) {
         load.metadata.format = 'defined';
         return '';
       }
